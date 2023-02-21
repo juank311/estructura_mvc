@@ -1,6 +1,6 @@
 <?php
 
-class PruebaClass {
+class PruebaController {
 
     public function __construct()
     {

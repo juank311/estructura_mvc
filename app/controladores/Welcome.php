@@ -1,10 +1,17 @@
 <?php
 
-class WelcomeClass{
+class WelcomeController extends Controlador
+
+{
 
     public function __construct()
     {
-        echo 'Controlador Welcome cargado';
+        echo 'Controlador Welcome cargado'; 
+    } 
+
+    public function index()
+    {
+        $this->vista('inicio');
     }
 }
 

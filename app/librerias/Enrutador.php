@@ -8,7 +8,7 @@ class EnrutadorClass
 {   
     protected $controladorDefault = 'welcome';
     protected $metodoDefault = 'index';
-    protected $parametroDefault = 'index';
+    protected $parametroDefault = [];
     #creacion de los parametros necesarios para la funcionalidad
 
     public function __construct()
@@ -17,23 +17,41 @@ class EnrutadorClass
         #instancia al constructor que ejecuta el metodo que obtiene la URL y la divide en un array con diferentes indices (/), ej: Articulos/editar/6 
        //print_r ($this->obtenerURL());
 
-       if (is_array($url)) {
-        if (file_exists('../app/controladores/'.ucwords($url[0]).'.php')) 
-        #verifica si existe el controlador en la carpeta controladores
-        {
-             $this->controladorDefault = ucwords($url[0]);
-             #establece el controlador actual si existe
- 
-             unset($url[0]);
-             #elimina el indice [0] de la url
-        }
+       if (is_array($url)) 
+       {
+            if (file_exists('../app/controladores/'.ucwords($url[0]).'.php')) 
+            #verifica si existe el controlador en la carpeta controladores
+            {
+                $this->controladorDefault = ucwords($url[0]);
+                #establece el controlador actual si existe
+    
+                unset($url[0]);
+                #elimina el indice [0] de la url
+            }
        }
        
        require_once('../app/controladores/'.$this->controladorDefault).'.php';
        #requiere el controlador digitado en la url
-       $class = $this->controladorDefault."Class";
+       $class = $this->controladorDefault."Controller";
        $this->controladorDefault = new $class;
 
+       if (isset($url[1])) 
+       {
+            if (method_exists($this->controladorDefault, $url[1])) 
+            {
+                $this->metodoDefault = $url[1];
+                unset($url[1]);
+                #elimina el indice [0] de la url
+            }
+       }
+       echo $this->metodoDefault;
+
+      if (isset($url[2])) {
+         #obtener los parametros
+        $this->parametroDefault = $url ? array_values($url) : [];
+        #llamar callback con parametros array
+        call_user_func_array([$this->controladorDefault, $this->metodoDefault], $this->parametroDefault);
+      }
         
     }
 
