@@ -46,12 +46,12 @@ class EnrutadorClass
        }
        echo $this->metodoDefault;
 
-      if (isset($url[2])) {
+      //if (isset($url[2])) {
          #obtener los parametros
         $this->parametroDefault = $url ? array_values($url) : [];
         #llamar callback con parametros array
         call_user_func_array([$this->controladorDefault, $this->metodoDefault], $this->parametroDefault);
-      }
+      //}
         
     }
 

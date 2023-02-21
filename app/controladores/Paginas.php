@@ -9,13 +9,12 @@ class PaginasController extends Controlador
 
     public function index()
     {
-        $this->vista('hola');
+        $this->vista('paginas/inicio');
     }
 
     public function articulo()
     {
-        echo "<br>";
-        echo "soy el metodo articulo de la clase paginas";
+        $this->vista('paginas/inicio');
     }
 
     public function actualizar($id)

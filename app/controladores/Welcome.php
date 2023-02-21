@@ -11,7 +11,7 @@ class WelcomeController extends Controlador
 
     public function index()
     {
-        $this->vista('inicio');
+        $this->vista('welcome/inicio');
     }
 }
 
