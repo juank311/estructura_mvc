@@ -9,7 +9,7 @@ class PaginasController extends Controlador
 
     public function index()
     {
-        $this->vista('paginas/inicio');
+        $this->vista('inicio');
     }
 
     public function articulo()
